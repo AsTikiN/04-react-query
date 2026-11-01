@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import ReactPaginate from "react-paginate";
+import ReactPaginateOriginal from "react-paginate";
 import toast, { Toaster } from "react-hot-toast";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
@@ -10,6 +10,13 @@ import SearchBar from "../SearchBar/SearchBar";
 import { fetchMovies } from "../../services/movieService";
 import type { Movie } from "../../types/movie";
 import css from "./App.module.css";
+
+const ReactPaginate =
+  (
+    ReactPaginateOriginal as unknown as {
+      default?: typeof ReactPaginateOriginal;
+    }
+  ).default ?? ReactPaginateOriginal;
 
 export default function App() {
   const [query, setQuery] = useState("");
